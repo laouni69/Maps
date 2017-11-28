@@ -1,0 +1,42 @@
+body {
+  position: absolute;
+  top: 5%;
+  left: 12.5%;
+  height: 75%;
+  width: 75%;
+  margin-right: auto;
+  margin-left: auto;
+  font-color: #a3ccff;
+}
+
+.erreur{
+  color: #CCFF66;
+}
+
+#map {
+  height: 100%;
+}
+
+#frm1 {
+  margin-right: auto;
+  margin-left: auto;
+  width:500px;
+  text-align: center;
+  border-style: groove;
+  background-color: white;
+}
+
+h1 {
+  font-size: 90px;
+  text-decoration-style: bold;
+  color: rgb(163, 204, 255);
+}
+
+#button{
+  position: center;
+  display: block;
+  margin : auto;
+  size: 12;
+  width: 500px;
+  border-style: groove;
+}

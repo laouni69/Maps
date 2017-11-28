@@ -1,0 +1,82 @@
+<head>
+  <title>My Map</title>
+
+</head>
+<body background="assets/card.jpg">
+
+  <h1>Utilisez ma Map:</h1>
+  <form id="frm1" action="">
+    Longitude: <input id="latform" type="number" name="fname" value="45.761154"><br>
+    Latitude: <input id="longform" type="number" name="lname" value="4.855819"><br>
+    Niveau de Zoom: <input id="zoomform" type="number" name="fname" value=""><br>
+  </form> 
+  <button id="button" onclick="myFunction()" >Localisez !</button>
+
+  <p class="erreur" id="erreur1"></p>
+  <p class="erreur" id="erreur2"></p>
+  <p class="erreur" id="erreur3"></p>
+
+  <div id="map"></div>
+  <script>
+    var map;
+
+    var x = document.getElementById("latform");
+    var y = document.getElementById("longform");
+    var z = document.getElementById("zoomform");
+    var lt = 7.976202;
+    var lg = 98.337877;
+    var nivzoom = 10;
+
+    function myFunction() {
+      if (parseInt(x.value)>=-85 && parseInt(x.value)<=85){
+        lt = parseInt(x.value);
+      }else{
+        document.getElementById('erreur1').innerHTML = 'Veuillez indiquer une latitude comprise entre -85 et 85';
+      }
+      if (parseInt(y.value)>=-180 && parseInt(x.value)<=180){
+        lg = parseInt(y.value);
+      }else{
+        document.getElementById('erreur2').innerHTML = 'Veuillez indiquer une longitude comprise entre -180 et 180';
+      }
+      
+      if(parseInt(z.value)>=0 && parseInt(z.value)<=20){
+        nivzoom = parseInt(z.value);
+
+      }else{
+
+        document.getElementById('erreur3').innerHTML = 'Veuillez indiquer un zoom compris entre 0 et 20';
+      }
+
+
+      initMap();
+
+    }
+
+    function initMap() {
+      var uluru = {lat: lt, lng: lg};
+      map = new google.maps.Map(document.getElementById('map'), {
+        center: uluru,
+        zoom: nivzoom
+      });
+      marker = new google.maps.Marker({
+        map: map,
+        draggable: true,
+        animation: google.maps.Animation.DROP,
+        position: uluru
+      });
+      marker.addListener('click', toggleBounce);
+    }
+
+    function toggleBounce() {
+      if (marker.getAnimation() !== null) {
+        marker.setAnimation(null);
+      } else {
+        marker.setAnimation(google.maps.Animation.BOUNCE);
+      }
+    }
+
+
+  </script>
+  <script src="https://maps.googleapis.com/maps/api/js?key=<%=ENV['YOUR_API_KEY']%>&callback=initMap"
+    async defer></script>
+  </body>
